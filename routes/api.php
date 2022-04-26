@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,14 @@ Route::get('random', function () {
     return response()->json(['status' => 'ok', 'numero' => $numero , 'proyecto' => env('CURRENT_APPLICATION_KEY')], 200);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// API
+Route::post('register', [UserController::class, 'register']);
+Route::post('login'   , [UserController::class, 'login']);
+
+// Proteccion Sanctum
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('user-profile',[UserController::class, 'userProfile']);
+    Route::get('logout'      ,[UserController::class, 'logout']);
+
 });
