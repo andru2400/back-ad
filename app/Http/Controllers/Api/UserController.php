@@ -76,7 +76,7 @@ class UserController extends Controller
         // Eliminar Token
         return response()->json([
             'status'    => 1,
-            'message'   => "Perfil del usuario!",
+            'message'   => "Logout exitoso, se eliminaron tokens del usuario!",
             'data'      => auth()->user()
         ]);
     }
